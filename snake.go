@@ -53,10 +53,12 @@ func (snake *Snake) head() Node {
 
 // TODO: see if there's a way to restrict parameter direction to const
 func (snake *Snake) Turn(direction int) {
-	angle := float64((direction - snake.Direction) * 90)
-	if math.Abs(angle) != 180.0 { // You can't turn to opposite direction
-		snake.Direction = direction
+	// You can't turn to opposite direction
+	if angle := float64((direction - snake.Direction) * 90); math.Abs(angle) == 180.0 {
+		return
 	}
+
+	snake.Direction = direction
 }
 
 func NewSnake() *Snake {
