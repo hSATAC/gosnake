@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/davecgh/go-spew/spew"
+	//"github.com/davecgh/go-spew/spew"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -10,7 +10,6 @@ func TestSnake(t *testing.T) {
 	var snake = NewSnake()
 	assert.Equal(t, snake.Direction, SNAKE_DIRECTION_RIGHT, "")
 	assert.Equal(t, len(snake.Body), 2, "")
-	spew.Dump("test")
 }
 
 func TestSnakeLen(t *testing.T) {
@@ -54,4 +53,17 @@ func TestSnakeMoveUp(t *testing.T) {
 	assert.Equal(t, snake.Len(), 2, "")
 	assert.Equal(t, snake.Body[0], Node{x: 4, y: 5})
 	assert.Equal(t, snake.Body[1], Node{x: 4, y: 4})
+}
+
+func TestSnakeTurn(t *testing.T) {
+	var snake = NewSnake()
+	snake.Turn(SNAKE_DIRECTION_UP)
+	assert.Equal(t, snake.Direction, SNAKE_DIRECTION_UP, "")
+}
+
+func TestSnakeUTurn(t *testing.T) {
+	var snake = NewSnake()
+	snake.Direction = SNAKE_DIRECTION_DOWN
+	snake.Turn(SNAKE_DIRECTION_UP)
+	assert.Equal(t, snake.Direction, SNAKE_DIRECTION_DOWN, "")
 }

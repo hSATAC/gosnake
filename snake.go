@@ -1,10 +1,14 @@
 package main
 
+import (
+	"math"
+)
+
 const (
 	SNAKE_DIRECTION_UP = iota
 	SNAKE_DIRECTION_RIGHT
-	SNAKE_DIRECTION_LEFT
 	SNAKE_DIRECTION_DOWN
+	SNAKE_DIRECTION_LEFT
 )
 
 type Snake struct {
@@ -45,6 +49,14 @@ func (snake *Snake) Len() int {
 
 func (snake *Snake) head() Node {
 	return snake.Body[snake.Len()-1]
+}
+
+// TODO: see if there's a way to restrict parameter direction to const
+func (snake *Snake) Turn(direction int) {
+	angle := float64((direction - snake.Direction) * 90)
+	if math.Abs(angle) != 180.0 { // You can't turn to opposite direction
+		snake.Direction = direction
+	}
 }
 
 func NewSnake() *Snake {
