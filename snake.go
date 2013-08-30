@@ -9,10 +9,23 @@ const (
 
 type Snake struct {
 	Direction int
-	Body      [][]int
+	Body      []Node
+}
+
+type Node struct {
+	x int
+	y int
 }
 
 func NewSnake() *Snake {
-	snake := Snake{Direction: SNAKE_DIRECTION_RIGHT}
+	snake := Snake{}
+
+	// give default
+	snake.Direction = SNAKE_DIRECTION_RIGHT
+	snake.Body = append(snake.Body, Node{x: 0, y: 0})
 	return &snake
+}
+
+func (snake *Snake) Len() int {
+	return len(snake.Body)
 }
