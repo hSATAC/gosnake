@@ -10,9 +10,8 @@ import (
 	"time"
 )
 
-var snake = NewSnake()
-
 func main() {
+	spew.Dump("hi")
 	// initialize termbox
 	err := termbox.Init()
 	if err != nil {
@@ -22,18 +21,14 @@ func main() {
 	}
 	termbox.HideCursor()
 
-	//spew.Dump(termbox.Size())
-	spew.Dump("hi")
 	// go
 	go func() {
+		var snake = NewSnake()
+		var scene = Scene{snake: *snake}
+		scene.SetSize(termbox.Size())
 		for {
-			<-time.After(40 * time.Millisecond) //++ TODO: find out wether .After() or .Sleep() is better performance-wise
-			termbox.Flush()
-			termbox.Clear(termbox.ColorDefault, termbox.ColorDefault)
-			for _, node := range snake.Body {
-				termbox.SetCell(node.x, node.y, ' ', termbox.ColorDefault, termbox.ColorRed)
-			}
-			snake.Move()
+			<-time.After(40 * time.Millisecond)
+			scene.Draw()
 		}
 	}()
 

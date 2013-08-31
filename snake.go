@@ -12,8 +12,8 @@ const (
 )
 
 type Snake struct {
-	Direction int
-	Body      []Node
+	direction int
+	body      []Node
 }
 
 type Node struct {
@@ -23,13 +23,13 @@ type Node struct {
 
 func (snake *Snake) Move() {
 	// TODO:if eat fruit, don't kill tail here.
-	snake.Body = snake.Body[1:]
+	snake.body = snake.body[1:]
 
 	head := snake.head()
 	var new_head Node
 
 	// TODO: deal over edge case here.
-	switch snake.Direction {
+	switch snake.direction {
 	case SNAKE_DIRECTION_RIGHT:
 		new_head = Node{x: head.x + 1, y: head.y}
 	case SNAKE_DIRECTION_DOWN:
@@ -40,32 +40,32 @@ func (snake *Snake) Move() {
 		new_head = Node{x: head.x, y: head.y - 1}
 	}
 
-	snake.Body = append(snake.Body, new_head)
+	snake.body = append(snake.body, new_head)
 }
 
 func (snake *Snake) Len() int {
-	return len(snake.Body)
+	return len(snake.body)
 }
 
 func (snake *Snake) head() Node {
-	return snake.Body[snake.Len()-1]
+	return snake.body[snake.Len()-1]
 }
 
 // TODO: see if there's a way to restrict parameter direction to const
 func (snake *Snake) Turn(direction int) {
 	// You can't turn to opposite direction
-	if angle := float64((direction - snake.Direction) * 90); math.Abs(angle) == 180.0 {
+	if angle := float64((direction - snake.direction) * 90); math.Abs(angle) == 180.0 {
 		return
 	}
 
-	snake.Direction = direction
+	snake.direction = direction
 }
 
 func NewSnake() *Snake {
 	snake := Snake{}
 
 	// give default
-	snake.Direction = SNAKE_DIRECTION_RIGHT
-	snake.Body = []Node{Node{x: 0, y: 0}, Node{x: 1, y: 0}}
+	snake.direction = SNAKE_DIRECTION_RIGHT
+	snake.body = []Node{Node{x: 0, y: 0}, Node{x: 1, y: 0}}
 	return &snake
 }
