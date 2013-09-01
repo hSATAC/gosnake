@@ -11,20 +11,24 @@ import (
 )
 
 func main() {
-	spew.Dump("hi")
+	filename := os.Getenv("HOME") + "/.gosnake.log"
+	logfile, _ := os.OpenFile(filename, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	log.SetOutput(logfile)
+
 	// initialize termbox
 	err := termbox.Init()
 	if err != nil {
-		fmt.Println("Could not start termbox for gomatrix. View ~/.gomatrix-log for error messages.")
+		fmt.Println("Could not start termbox for gosnake.")
 		log.Printf("Cannot start gomatrix, termbox.Init() gave an error:\n%s\n", err)
 		os.Exit(1)
 	}
 	termbox.HideCursor()
 
+	var snake = NewSnake()
+	var scene = Scene{snake: *snake}
+
 	// go
 	go func() {
-		var snake = NewSnake()
-		var scene = Scene{snake: *snake}
 		scene.SetSize(termbox.Size())
 		for {
 			<-time.After(40 * time.Millisecond)
@@ -52,28 +56,27 @@ func main() {
 			// select for either event or signal
 			select {
 			case event := <-eventChan:
-				//log.Printf("Have event: \n%s", spew.Sdump(event))
+				log.Printf("Have event: \n%s", spew.Sdump(event))
 				// switch on event type
 				switch event.Type {
 				case termbox.EventKey: // actions depend on key
 					switch event.Key {
 					case termbox.KeyCtrlZ, termbox.KeyCtrlC:
 						return
-						//++ TODO: add more fun keys (slowmo? freeze? rampage?)
 					}
 
 					switch event.Ch {
 					case 'q':
 						return
 
-					case 'c':
-						termbox.Clear(termbox.ColorBlack, termbox.ColorBlack)
-
+					case 'w':
+						scene.snake.Turn(SNAKE_DIRECTION_UP)
+					case 's':
+						scene.snake.Turn(SNAKE_DIRECTION_DOWN)
 					case 'a':
-						//characters = alphaNumerics
-
-					case 'k':
-						//characters = halfWidthKana
+						scene.snake.Turn(SNAKE_DIRECTION_LEFT)
+					case 'd':
+						scene.snake.Turn(SNAKE_DIRECTION_RIGHT)
 					}
 
 				case termbox.EventResize: // set sizes
@@ -92,7 +95,6 @@ func main() {
 
 	// close up
 	termbox.Close()
-	log.Println("stopping gomatrix")
-	fmt.Println("Thank you for connecting with Morpheus' Matrix API v4.2. Have a nice day!")
+	log.Println("stopping gosnake")
 	os.Exit(0)
 }
