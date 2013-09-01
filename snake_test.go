@@ -8,7 +8,7 @@ import (
 
 func TestSnake(t *testing.T) {
 	var snake = NewSnake()
-	assert.Equal(t, snake.direction, SNAKE_DIRECTION_RIGHT, "")
+	assert.Equal(t, snake.direction, Direction(SNAKE_DIRECTION_RIGHT), "")
 	assert.Equal(t, len(snake.body), 2, "")
 }
 
@@ -58,12 +58,12 @@ func TestSnakeMoveUp(t *testing.T) {
 func TestSnakeTurn(t *testing.T) {
 	var snake = NewSnake()
 	snake.Turn(SNAKE_DIRECTION_UP)
-	assert.Equal(t, snake.direction, SNAKE_DIRECTION_UP, "")
+	assert.Equal(t, snake.direction, Direction(SNAKE_DIRECTION_UP), "")
 }
 
 func TestSnakeUTurn(t *testing.T) {
 	var snake = NewSnake()
 	snake.direction = SNAKE_DIRECTION_DOWN
 	snake.Turn(SNAKE_DIRECTION_UP)
-	assert.Equal(t, snake.direction, SNAKE_DIRECTION_DOWN, "")
+	assert.Equal(t, snake.direction, Direction(SNAKE_DIRECTION_DOWN), "")
 }

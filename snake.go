@@ -1,6 +1,7 @@
 package main
 
 import (
+	//"github.com/davecgh/go-spew/spew"
 	"math"
 )
 
@@ -11,8 +12,14 @@ const (
 	SNAKE_DIRECTION_LEFT
 )
 
+type Direction byte
+
+func (direction Direction) angle() int {
+	return int(direction) * 90
+}
+
 type Snake struct {
-	direction int
+	direction Direction
 	body      []Node
 }
 
@@ -52,9 +59,10 @@ func (snake *Snake) head() Node {
 }
 
 // TODO: see if there's a way to restrict parameter direction to const
-func (snake *Snake) Turn(direction int) {
+func (snake *Snake) Turn(direction Direction) {
 	// You can't turn to opposite direction
-	if angle := float64((direction - snake.direction) * 90); math.Abs(angle) == 180.0 {
+	angle := float64(direction.angle() - snake.direction.angle())
+	if math.Abs(angle) == 180.0 {
 		return
 	}
 

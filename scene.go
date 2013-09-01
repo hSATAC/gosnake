@@ -21,8 +21,12 @@ func (scene *Scene) SetSize(width int, height int) {
 func (scene *Scene) Draw() {
 	termbox.Flush()
 	termbox.Clear(termbox.ColorDefault, termbox.ColorDefault)
+	scene.drawSnake()
+	scene.snake.Move()
+}
+
+func (scene *Scene) drawSnake() {
 	for _, node := range scene.snake.body {
 		termbox.SetCell(node.x, node.y, ' ', termbox.ColorDefault, termbox.ColorRed)
 	}
-	scene.snake.Move()
 }
