@@ -20,8 +20,10 @@ func (direction Direction) angle() int {
 
 type Snake struct {
 	direction Direction
-	body      []Node
+	body      Body
 }
+
+type Body []Node
 
 type Node struct {
 	x int
@@ -74,6 +76,6 @@ func NewSnake() *Snake {
 
 	// give default
 	snake.direction = SNAKE_DIRECTION_RIGHT
-	snake.body = []Node{Node{x: 0, y: 0}, Node{x: 1, y: 0}}
+	snake.body = Body{Node{x: 0, y: 0}, Node{x: 1, y: 0}}
 	return &snake
 }

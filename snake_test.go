@@ -14,7 +14,7 @@ func TestSnake(t *testing.T) {
 
 func TestSnakeLen(t *testing.T) {
 	var snake = NewSnake()
-	snake.body = []Node{Node{x: 0, y: 0}, Node{x: 1, y: 1}}
+	snake.body = Body{Node{x: 0, y: 0}, Node{x: 1, y: 1}}
 	assert.Equal(t, snake.Len(), 2, "")
 }
 
@@ -38,7 +38,7 @@ func TestSnakeMoveDown(t *testing.T) {
 func TestSnakeMoveLeft(t *testing.T) {
 	var snake = NewSnake()
 	snake.direction = SNAKE_DIRECTION_LEFT
-	snake.body = []Node{Node{x: 5, y: 5}, Node{x: 4, y: 5}}
+	snake.body = Body{Node{x: 5, y: 5}, Node{x: 4, y: 5}}
 	snake.Move()
 	assert.Equal(t, snake.Len(), 2, "")
 	assert.Equal(t, snake.body[0], Node{x: 4, y: 5})
@@ -48,7 +48,7 @@ func TestSnakeMoveLeft(t *testing.T) {
 func TestSnakeMoveUp(t *testing.T) {
 	var snake = NewSnake()
 	snake.direction = SNAKE_DIRECTION_UP
-	snake.body = []Node{Node{x: 5, y: 5}, Node{x: 4, y: 5}}
+	snake.body = Body{Node{x: 5, y: 5}, Node{x: 4, y: 5}}
 	snake.Move()
 	assert.Equal(t, snake.Len(), 2, "")
 	assert.Equal(t, snake.body[0], Node{x: 4, y: 5})
