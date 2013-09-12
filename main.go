@@ -25,7 +25,7 @@ func main() {
 	termbox.HideCursor()
 
 	var snake = NewSnake()
-	var scene = Scene{snake: *snake}
+	var scene = Scene{character: snake}
 
 	// go
 	go func() {
@@ -70,13 +70,13 @@ func main() {
 						return
 
 					case 'w':
-						scene.snake.Turn(SNAKE_DIRECTION_UP)
+						scene.character.Turn(SNAKE_DIRECTION_UP)
 					case 's':
-						scene.snake.Turn(SNAKE_DIRECTION_DOWN)
+						scene.character.Turn(SNAKE_DIRECTION_DOWN)
 					case 'a':
-						scene.snake.Turn(SNAKE_DIRECTION_LEFT)
+						scene.character.Turn(SNAKE_DIRECTION_LEFT)
 					case 'd':
-						scene.snake.Turn(SNAKE_DIRECTION_RIGHT)
+						scene.character.Turn(SNAKE_DIRECTION_RIGHT)
 					}
 
 				case termbox.EventResize: // set sizes

@@ -4,14 +4,20 @@ import (
 	"github.com/nsf/termbox-go"
 )
 
+type Character interface {
+	Move()
+	Turn(direction Direction)
+	Draw()
+}
+
 type ScreenSize struct {
 	width  int
 	height int
 }
 
 type Scene struct {
-	snake Snake
-	size  ScreenSize
+	character Character
+	size      ScreenSize
 }
 
 func (scene *Scene) SetSize(width int, height int) {
@@ -21,12 +27,6 @@ func (scene *Scene) SetSize(width int, height int) {
 func (scene *Scene) Draw() {
 	termbox.Flush()
 	termbox.Clear(termbox.ColorDefault, termbox.ColorDefault)
-	scene.drawSnake()
-	scene.snake.Move()
-}
-
-func (scene *Scene) drawSnake() {
-	for _, node := range scene.snake.body {
-		termbox.SetCell(node.x, node.y, ' ', termbox.ColorDefault, termbox.ColorRed)
-	}
+	scene.character.Draw()
+	scene.character.Move()
 }

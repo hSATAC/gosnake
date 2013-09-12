@@ -2,6 +2,7 @@ package main
 
 import (
 	//"github.com/davecgh/go-spew/spew"
+	"github.com/nsf/termbox-go"
 	"math"
 )
 
@@ -69,6 +70,12 @@ func (snake *Snake) Turn(direction Direction) {
 	}
 
 	snake.direction = direction
+}
+
+func (snake *Snake) Draw() {
+	for _, node := range snake.body {
+		termbox.SetCell(node.x, node.y, ' ', termbox.ColorDefault, termbox.ColorRed)
+	}
 }
 
 func NewSnake() *Snake {
