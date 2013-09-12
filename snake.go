@@ -32,6 +32,10 @@ type Node struct {
 }
 
 func (snake *Snake) Move() {
+	snake.MoveInScreenSize(ScreenSize{0, 0})
+}
+
+func (snake *Snake) MoveInScreenSize(screenSize ScreenSize) {
 	// TODO:if eat fruit, don't kill tail here.
 	snake.body = snake.body[1:]
 
