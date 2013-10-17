@@ -40,21 +40,25 @@ func (snake *Snake) MoveInScreenSize(screenSize ScreenSize) {
 	snake.body = snake.body[1:]
 
 	head := snake.head()
-	var new_head Node
+	var newHead Node
 
 	// TODO: deal over edge case here.
 	switch snake.direction {
 	case SNAKE_DIRECTION_RIGHT:
-		new_head = Node{x: head.x + 1, y: head.y}
+		newHead = Node{x: head.x + 1, y: head.y}
 	case SNAKE_DIRECTION_DOWN:
-		new_head = Node{x: head.x, y: head.y + 1}
+		newHead = Node{x: head.x, y: head.y + 1}
 	case SNAKE_DIRECTION_LEFT:
-		new_head = Node{x: head.x - 1, y: head.y}
+		newHead = Node{x: head.x - 1, y: head.y}
 	case SNAKE_DIRECTION_UP:
-		new_head = Node{x: head.x, y: head.y - 1}
+		newHead = Node{x: head.x, y: head.y - 1}
 	}
 
-	snake.body = append(snake.body, new_head)
+	if screenSize.width > 0 && newHead.x >= screenSize.width {
+		newHead.x = screenSize.width - newHead.x
+	}
+
+	snake.body = append(snake.body, newHead)
 }
 
 func (snake *Snake) Len() int {
