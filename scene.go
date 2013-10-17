@@ -6,6 +6,7 @@ import (
 
 type Character interface {
 	Move()
+	MoveInScreenSize(screenSize ScreenSize)
 	Turn(direction Direction)
 	Draw()
 }
@@ -28,5 +29,6 @@ func (scene *Scene) Draw() {
 	termbox.Flush()
 	termbox.Clear(termbox.ColorDefault, termbox.ColorDefault)
 	scene.character.Draw()
-	scene.character.Move()
+	//scene.character.Move()
+	scene.character.MoveInScreenSize(scene.size)
 }
