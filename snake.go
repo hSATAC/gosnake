@@ -54,8 +54,20 @@ func (snake *Snake) MoveInScreenSize(screenSize ScreenSize) {
 		newHead = Node{x: head.x, y: head.y - 1}
 	}
 
-	if screenSize.width > 0 && newHead.x >= screenSize.width {
-		newHead.x = screenSize.width - newHead.x
+	if screenSize.width > 0 {
+		if newHead.x < 0 { // over left edge
+			newHead.x = screenSize.width - 1
+		} else if newHead.x >= screenSize.width { // over right edge
+			newHead.x = screenSize.width - newHead.x
+		}
+	}
+
+	if screenSize.height > 0 {
+		if newHead.y < 0 { // over top edge
+			newHead.y = screenSize.height - 1
+		} else if newHead.y >= screenSize.height { // over bottom edge
+			newHead.y = screenSize.height - newHead.y
+		}
 	}
 
 	snake.body = append(snake.body, newHead)
