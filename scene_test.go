@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/davecgh/go-spew/spew"
+	//"github.com/davecgh/go-spew/spew"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -18,11 +18,4 @@ func TestSetSizeOddNumber(t *testing.T) {
 	scene.SetSize(99, 99)
 	assert.Equal(t, scene.size.width, 49)
 	assert.Equal(t, scene.size.height, 99)
-}
-
-func TestDraw(t *testing.T) {
-	var scene = Scene{}
-	var snake = NewSnake()
-	scene.character = snake
-	spew.Dump(scene)
 }

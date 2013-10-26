@@ -35,5 +35,6 @@ func (scene *Scene) Draw() {
 }
 
 func DrawPoint(x, y int) {
-	termbox.SetCell(x, y, ' ', termbox.ColorDefault, termbox.ColorRed)
+	termbox.SetCell(x*2, y, ' ', termbox.ColorDefault, termbox.ColorRed)
+	termbox.SetCell((x*2)-1, y, ' ', termbox.ColorDefault, termbox.ColorRed)
 }
