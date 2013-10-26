@@ -33,3 +33,7 @@ func (scene *Scene) Draw() {
 	//scene.character.Move()
 	scene.character.MoveInScreenSize(scene.size)
 }
+
+func DrawPoint(x, y int) {
+	termbox.SetCell(x, y, ' ', termbox.ColorDefault, termbox.ColorRed)
+}
