@@ -11,6 +11,7 @@ import (
 )
 
 func DrawPoint(x, y int) {
+	// Double the width
 	termbox.SetCell(x*2, y, ' ', termbox.ColorDefault, termbox.ColorRed)
 	termbox.SetCell((x*2)-1, y, ' ', termbox.ColorDefault, termbox.ColorRed)
 }
@@ -21,6 +22,7 @@ func ClearScene() {
 }
 
 func SceneSize() (width int, height int) {
+	// Half the width because we have to to double it when drawing.
 	width, height = termbox.Size()
 	return width / 2, height
 }
