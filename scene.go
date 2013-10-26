@@ -22,6 +22,7 @@ type Scene struct {
 }
 
 func (scene *Scene) SetSize(width int, height int) {
+	width = width / 2
 	scene.size = ScreenSize{width: width, height: height}
 }
 
