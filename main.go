@@ -10,6 +10,21 @@ import (
 	"time"
 )
 
+func DrawPoint(x, y int) {
+	termbox.SetCell(x*2, y, ' ', termbox.ColorDefault, termbox.ColorRed)
+	termbox.SetCell((x*2)-1, y, ' ', termbox.ColorDefault, termbox.ColorRed)
+}
+
+func ClearScene() {
+	termbox.Flush()
+	termbox.Clear(termbox.ColorDefault, termbox.ColorDefault)
+}
+
+func SceneSize() (width int, height int) {
+	width, height = termbox.Size()
+	return width / 2, height
+}
+
 func main() {
 	filename := os.Getenv("HOME") + "/.gosnake.log"
 	logfile, _ := os.OpenFile(filename, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
@@ -29,7 +44,7 @@ func main() {
 
 	// go
 	go func() {
-		scene.SetSize(termbox.Size())
+		scene.SetSize(SceneSize())
 		for {
 			<-time.After(40 * time.Millisecond)
 			scene.Draw()

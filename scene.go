@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/nsf/termbox-go"
+//"github.com/nsf/termbox-go"
 )
 
 type Character interface {
@@ -22,19 +22,12 @@ type Scene struct {
 }
 
 func (scene *Scene) SetSize(width int, height int) {
-	width = width / 2
 	scene.size = ScreenSize{width: width, height: height}
 }
 
 func (scene *Scene) Draw() {
-	termbox.Flush()
-	termbox.Clear(termbox.ColorDefault, termbox.ColorDefault)
+	ClearScene()
 	scene.character.Draw()
 	//scene.character.Move()
 	scene.character.MoveInScreenSize(scene.size)
-}
-
-func DrawPoint(x, y int) {
-	termbox.SetCell(x*2, y, ' ', termbox.ColorDefault, termbox.ColorRed)
-	termbox.SetCell((x*2)-1, y, ' ', termbox.ColorDefault, termbox.ColorRed)
 }
