@@ -5,7 +5,6 @@ import (
 )
 
 type Character interface {
-	Move()
 	MoveInScreenSize(screenSize ScreenSize)
 	Turn(direction Direction)
 	Draw()

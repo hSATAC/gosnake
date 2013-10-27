@@ -18,43 +18,6 @@ func TestSnakeLen(t *testing.T) {
 	assert.Equal(t, snake.Len(), 2)
 }
 
-func TestSnakeMove(t *testing.T) {
-	var snake = NewSnake()
-	snake.Move()
-	assert.Equal(t, snake.Len(), 2)
-	assert.Equal(t, snake.body[0], Node{x: 1, y: 0})
-	assert.Equal(t, snake.body[1], Node{x: 2, y: 0})
-}
-
-func TestSnakeMoveDown(t *testing.T) {
-	var snake = NewSnake()
-	snake.direction = SNAKE_DIRECTION_DOWN
-	snake.Move()
-	assert.Equal(t, snake.Len(), 2)
-	assert.Equal(t, snake.body[0], Node{x: 1, y: 0})
-	assert.Equal(t, snake.body[1], Node{x: 1, y: 1})
-}
-
-func TestSnakeMoveLeft(t *testing.T) {
-	var snake = NewSnake()
-	snake.direction = SNAKE_DIRECTION_LEFT
-	snake.body = Body{Node{x: 5, y: 5}, Node{x: 4, y: 5}}
-	snake.Move()
-	assert.Equal(t, snake.Len(), 2)
-	assert.Equal(t, snake.body[0], Node{x: 4, y: 5})
-	assert.Equal(t, snake.body[1], Node{x: 3, y: 5})
-}
-
-func TestSnakeMoveUp(t *testing.T) {
-	var snake = NewSnake()
-	snake.direction = SNAKE_DIRECTION_UP
-	snake.body = Body{Node{x: 5, y: 5}, Node{x: 4, y: 5}}
-	snake.Move()
-	assert.Equal(t, snake.Len(), 2)
-	assert.Equal(t, snake.body[0], Node{x: 4, y: 5})
-	assert.Equal(t, snake.body[1], Node{x: 4, y: 4})
-}
-
 func TestSnakeMoveOutOfRightEdge(t *testing.T) {
 	var snake = NewSnake()
 	var screenSize = ScreenSize{3, 3}
