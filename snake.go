@@ -37,9 +37,12 @@ func (snake *Snake) Move() {
 func (snake *Snake) MoveInScreenSize(screenSize ScreenSize) {
 	// TODO:if eat fruit, don't kill tail here.
 	snake.body = snake.body[1:]
-
 	head := snake.NewHead(screenSize)
+	snake.body = append(snake.body, head)
+}
 
+func (snake *Snake) GrowInScreenSize(screenSize ScreenSize) {
+	head := snake.NewHead(screenSize)
 	snake.body = append(snake.body, head)
 }
 

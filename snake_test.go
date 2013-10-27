@@ -131,6 +131,25 @@ func TestSnakeNewHead(t *testing.T) {
 	assert.Equal(t, snake.NewHead(screenSize), Node{x: 0, y: 0})
 }
 
+func TestSnakeGrow(t *testing.T) {
+	var snake = NewSnake()
+	var screenSize = ScreenSize{3, 3}
+
+	snake.GrowInScreenSize(screenSize)
+
+	assert.Equal(t, snake.Len(), 3)
+	assert.Equal(t, snake.body[0], Node{x: 0, y: 0})
+	assert.Equal(t, snake.body[1], Node{x: 1, y: 0})
+	assert.Equal(t, snake.body[2], Node{x: 2, y: 0})
+
+	snake.Turn(SNAKE_DIRECTION_DOWN)
+	snake.MoveInScreenSize(screenSize)
+	assert.Equal(t, snake.Len(), 3)
+	assert.Equal(t, snake.body[0], Node{x: 1, y: 0})
+	assert.Equal(t, snake.body[1], Node{x: 2, y: 0})
+	assert.Equal(t, snake.body[2], Node{x: 2, y: 1})
+}
+
 func TestSnakeTurn(t *testing.T) {
 	var snake = NewSnake()
 	snake.Turn(SNAKE_DIRECTION_UP)
