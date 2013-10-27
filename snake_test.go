@@ -121,6 +121,16 @@ func TestSnakeMoveOutOfLeftEdge(t *testing.T) {
 	assert.Equal(t, snake.body[1], Node{x: 2, y: 1})
 }
 
+func TestSnakeNewHead(t *testing.T) {
+	var snake = NewSnake()
+	var screenSize = ScreenSize{3, 3}
+
+	assert.Equal(t, snake.NewHead(screenSize), Node{x: 2, y: 0})
+
+	snake.MoveInScreenSize(screenSize)
+	assert.Equal(t, snake.NewHead(screenSize), Node{x: 0, y: 0})
+}
+
 func TestSnakeTurn(t *testing.T) {
 	var snake = NewSnake()
 	snake.Turn(SNAKE_DIRECTION_UP)
