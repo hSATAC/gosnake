@@ -125,3 +125,13 @@ func TestSnakeUTurn(t *testing.T) {
 	snake.Turn(SNAKE_DIRECTION_UP)
 	assert.Equal(t, snake.direction, Direction(SNAKE_DIRECTION_DOWN))
 }
+
+func TestBodyContains(t *testing.T) {
+	var body = Body{Node{x: 0, y: 0}, Node{x: 1, y: 1}}
+	assert.Equal(t, body.Contains(Node{x: 1, y: 1}), true)
+}
+
+func TestBodyContainsFails(t *testing.T) {
+	var body = Body{Node{x: 0, y: 0}, Node{x: 1, y: 1}}
+	assert.Equal(t, body.Contains(Node{x: 1, y: 2}), false)
+}

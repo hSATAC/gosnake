@@ -30,6 +30,15 @@ type Node struct {
 	y int
 }
 
+func (body Body) Contains(node Node) bool {
+	for _, n := range body {
+		if node == n {
+			return true
+		}
+	}
+	return false
+}
+
 func (snake *Snake) MoveInScreenSize(screenSize ScreenSize) {
 	// TODO:if eat fruit, don't kill tail here.
 	snake.body = snake.body[1:]

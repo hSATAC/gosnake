@@ -27,6 +27,11 @@ func (scene *Scene) SetSize(width int, height int) {
 func (scene *Scene) Draw() {
 	ClearScene()
 	scene.character.Draw()
-	//scene.character.Move()
 	scene.character.MoveInScreenSize(scene.size)
+}
+
+func (scene *Scene) AvailableNodes() []Node {
+	var availableNodes = []Node{}
+
+	return availableNodes
 }
