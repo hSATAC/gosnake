@@ -109,6 +109,10 @@ func (snake *Snake) Draw() {
 	}
 }
 
+func (snake *Snake) Body() Body {
+	return snake.body
+}
+
 // TODO: init with position, direction & length
 func NewSnake() *Snake {
 	snake := Snake{}

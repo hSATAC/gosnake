@@ -7,11 +7,11 @@ import (
 )
 
 func TestScene(t *testing.T) {
+	t.SkipNow()
 }
 
 func TestSceneAvailableNodes(t *testing.T) {
-	t.SkipNow()
 	var snake = NewSnake()
-	var scene = Scene{size: ScreenSize{5, 5}, character: snake}
-	assert.Equal(t, scene.AvailableNodes(), []Node{Node{x: 0, y: 0}})
+	var scene = Scene{size: ScreenSize{2, 2}, character: snake}
+	assert.Equal(t, scene.AvailableNodes(), []Node{Node{x: 0, y: 1}, Node{x: 1, y: 1}})
 }

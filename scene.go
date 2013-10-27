@@ -8,6 +8,7 @@ type Character interface {
 	MoveInScreenSize(screenSize ScreenSize)
 	Turn(direction Direction)
 	Draw()
+	Body() Body
 }
 
 type ScreenSize struct {
@@ -30,8 +31,15 @@ func (scene *Scene) Draw() {
 	scene.character.MoveInScreenSize(scene.size)
 }
 
-func (scene *Scene) AvailableNodes() []Node {
-	var availableNodes = []Node{}
+func (scene *Scene) AvailableNodes() (availableNodes []Node) {
+	for x := 0; x < scene.size.width; x++ {
+		for y := 0; y < scene.size.height; y++ {
+			node := Node{x: x, y: y}
+			if !scene.character.Body().Contains(node) {
+				availableNodes = append(availableNodes, node)
+			}
+		}
+	}
 
 	return availableNodes
 }
