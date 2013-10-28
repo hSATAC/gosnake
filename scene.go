@@ -15,6 +15,8 @@ const (
 
 type Character interface {
 	MoveInScreenSize(screenSize ScreenSize)
+	GrowInScreenSize(screenSize ScreenSize)
+	NewHead(screenSize ScreenSize) Node
 	Turn(direction Direction)
 	Draw()
 	Body() Body
@@ -39,7 +41,12 @@ func (scene *Scene) Draw() {
 	ClearScene()
 	scene.drawFruit()
 	scene.character.Draw()
-	scene.character.MoveInScreenSize(scene.size)
+	if scene.character.NewHead(scene.size) == scene.fruit {
+		scene.character.GrowInScreenSize(scene.size)
+		scene.generateFruit()
+	} else {
+		scene.character.MoveInScreenSize(scene.size)
+	}
 }
 
 func (scene *Scene) availableNodes() (availableNodes []Node) {

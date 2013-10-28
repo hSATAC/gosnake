@@ -13,7 +13,7 @@ import (
 func DrawPoint(x, y int, color Color) {
 	// Double the width
 	termbox.SetCell(x*2, y, ' ', termbox.ColorDefault, termbox.Attribute(color))
-	termbox.SetCell((x*2)-1, y, ' ', termbox.ColorDefault, termbox.Attribute(color))
+	termbox.SetCell((x*2)+1, y, ' ', termbox.ColorDefault, termbox.Attribute(color))
 }
 
 func ClearScene() {
@@ -51,7 +51,7 @@ func main() {
 	// go
 	go func() {
 		for {
-			<-time.After(40 * time.Millisecond)
+			<-time.After(60 * time.Millisecond)
 			scene.Draw()
 		}
 	}()
