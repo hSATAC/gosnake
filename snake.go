@@ -40,7 +40,6 @@ func (body Body) Contains(node Node) bool {
 }
 
 func (snake *Snake) MoveInScreenSize(screenSize ScreenSize) {
-	// TODO:if eat fruit, don't kill tail here.
 	snake.body = snake.body[1:]
 	head := snake.NewHead(screenSize)
 	snake.body = append(snake.body, head)
@@ -92,7 +91,6 @@ func (snake *Snake) head() Node {
 	return snake.body[snake.Len()-1]
 }
 
-// TODO: see if there's a way to restrict parameter direction to const
 func (snake *Snake) Turn(direction Direction) {
 	// You can't turn to opposite direction
 	angle := float64(direction.angle() - snake.direction.angle())
@@ -105,7 +103,7 @@ func (snake *Snake) Turn(direction Direction) {
 
 func (snake *Snake) Draw() {
 	for _, node := range snake.body {
-		DrawPoint(node.x, node.y)
+		DrawPoint(node.x, node.y, COLOR_CHARACTER)
 	}
 }
 

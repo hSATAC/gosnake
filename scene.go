@@ -1,9 +1,16 @@
 package main
 
 import (
-	//"github.com/nsf/termbox-go"
+	"github.com/nsf/termbox-go"
 	"math/rand"
 	"time"
+)
+
+type Color termbox.Attribute
+
+const (
+	COLOR_CHARACTER Color = Color(termbox.ColorRed)
+	COLOR_FRUIT     Color = Color(termbox.ColorGreen)
 )
 
 type Character interface {
@@ -30,6 +37,7 @@ func (scene *Scene) SetSize(width int, height int) {
 
 func (scene *Scene) Draw() {
 	ClearScene()
+	scene.drawFruit()
 	scene.character.Draw()
 	scene.character.MoveInScreenSize(scene.size)
 }
@@ -59,7 +67,7 @@ func (scene *Scene) generateFruit() {
 }
 
 func (scene *Scene) drawFruit() {
-	DrawPoint(scene.fruit.x, scene.fruit.y)
+	DrawPoint(scene.fruit.x, scene.fruit.y, COLOR_FRUIT)
 }
 
 func NewScene(character Character, screenSize ScreenSize) *Scene {

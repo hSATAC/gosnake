@@ -10,10 +10,10 @@ import (
 	"time"
 )
 
-func DrawPoint(x, y int) {
+func DrawPoint(x, y int, color Color) {
 	// Double the width
-	termbox.SetCell(x*2, y, ' ', termbox.ColorDefault, termbox.ColorRed)
-	termbox.SetCell((x*2)-1, y, ' ', termbox.ColorDefault, termbox.ColorRed)
+	termbox.SetCell(x*2, y, ' ', termbox.ColorDefault, termbox.Attribute(color))
+	termbox.SetCell((x*2)-1, y, ' ', termbox.ColorDefault, termbox.Attribute(color))
 }
 
 func ClearScene() {
