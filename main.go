@@ -11,7 +11,7 @@ import (
 )
 
 func DrawPoint(x, y int, color Color) {
-	// Double the width
+	// Double the width otherwise it looks weird.
 	termbox.SetCell(x*2, y, ' ', termbox.ColorDefault, termbox.Attribute(color))
 	termbox.SetCell((x*2)+1, y, ' ', termbox.ColorDefault, termbox.Attribute(color))
 }
@@ -22,10 +22,9 @@ func ClearScene() {
 }
 
 func SceneSize() ScreenSize {
-	// Half the width because we have to to double it when drawing.
 	width, height := termbox.Size()
 	size := ScreenSize{}
-	size.width = width / 2
+	size.width = width / 2 // Half the width because we have to to double it when drawing.
 	size.height = height
 
 	return size
@@ -52,7 +51,10 @@ func main() {
 	go func() {
 		for {
 			<-time.After(60 * time.Millisecond)
-			scene.Draw()
+			stop := scene.Draw()
+			if stop {
+				break
+			}
 		}
 	}()
 
@@ -71,7 +73,7 @@ func main() {
 	signal.Notify(sigChan, os.Kill)
 
 	// handle termbox events and unix signals
-	func() { //++ TODO: dont use function literal. use labels instead.
+	func() {
 		for {
 			// select for either event or signal
 			select {
@@ -99,8 +101,8 @@ func main() {
 						scene.character.Turn(SNAKE_DIRECTION_RIGHT)
 					}
 
-				case termbox.EventResize: // set sizes
-					//setSizes(event.Width, event.Height)
+				case termbox.EventResize:
+					// TODO: Handle window resize, how?
 					log.Println("size changed")
 
 				case termbox.EventError: // quit

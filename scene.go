@@ -6,17 +6,24 @@ import (
 	"time"
 )
 
-type Color termbox.Attribute
+type (
+	Color           termbox.Attribute
+	CharacterStatus byte
+)
 
 const (
 	COLOR_CHARACTER Color = Color(termbox.ColorRed)
 	COLOR_FRUIT     Color = Color(termbox.ColorGreen)
 )
 
+const (
+	CHARACTER_STATUS_MOVE CharacterStatus = iota
+	CHARACTER_STATUS_GROW
+	CHARACTER_STATUS_DEAD
+)
+
 type Character interface {
-	MoveInScreenSize(screenSize ScreenSize)
-	GrowInScreenSize(screenSize ScreenSize)
-	NewHead(screenSize ScreenSize) Node
+	Move(screenSize ScreenSize, fruit Node) CharacterStatus
 	Turn(direction Direction)
 	Draw()
 	Body() Body
@@ -37,16 +44,19 @@ func (scene *Scene) SetSize(width int, height int) {
 	scene.size = ScreenSize{width: width, height: height}
 }
 
-func (scene *Scene) Draw() {
+func (scene *Scene) Draw() (stop bool) {
+	switch scene.character.Move(scene.size, scene.fruit) {
+	case CHARACTER_STATUS_GROW:
+		scene.generateFruit()
+	case CHARACTER_STATUS_DEAD:
+		stop = true
+	}
+
 	ClearScene()
 	scene.drawFruit()
 	scene.character.Draw()
-	if scene.character.NewHead(scene.size) == scene.fruit {
-		scene.character.GrowInScreenSize(scene.size)
-		scene.generateFruit()
-	} else {
-		scene.character.MoveInScreenSize(scene.size)
-	}
+
+	return stop
 }
 
 func (scene *Scene) availableNodes() (availableNodes []Node) {
