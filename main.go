@@ -21,10 +21,14 @@ func ClearScene() {
 	termbox.Clear(termbox.ColorDefault, termbox.ColorDefault)
 }
 
-func SceneSize() (width int, height int) {
+func SceneSize() ScreenSize {
 	// Half the width because we have to to double it when drawing.
-	width, height = termbox.Size()
-	return width / 2, height
+	width, height := termbox.Size()
+	size := ScreenSize{}
+	size.width = width / 2
+	size.height = height
+
+	return size
 }
 
 func main() {
@@ -42,11 +46,10 @@ func main() {
 	termbox.HideCursor()
 
 	var snake = NewSnake()
-	var scene = Scene{character: snake}
+	var scene = NewScene(snake, SceneSize())
 
 	// go
 	go func() {
-		scene.SetSize(SceneSize())
 		for {
 			<-time.After(40 * time.Millisecond)
 			scene.Draw()

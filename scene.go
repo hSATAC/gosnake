@@ -21,6 +21,7 @@ type ScreenSize struct {
 type Scene struct {
 	character Character
 	size      ScreenSize
+	fruit     Node
 }
 
 func (scene *Scene) SetSize(width int, height int) {
@@ -50,4 +51,19 @@ func (scene *Scene) randomAvailableNode() Node {
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	nodes := scene.availableNodes()
 	return nodes[r.Intn(len(nodes))]
+}
+
+func (scene *Scene) generateFruit() {
+	node := scene.randomAvailableNode()
+	scene.fruit = node
+}
+
+func (scene *Scene) drawFruit() {
+	DrawPoint(scene.fruit.x, scene.fruit.y)
+}
+
+func NewScene(character Character, screenSize ScreenSize) *Scene {
+	scene := Scene{size: screenSize, character: character}
+	scene.generateFruit()
+	return &scene
 }
