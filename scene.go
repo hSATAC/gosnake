@@ -1,7 +1,9 @@
 package main
 
 import (
-//"github.com/nsf/termbox-go"
+	//"github.com/nsf/termbox-go"
+	"math/rand"
+	"time"
 )
 
 type Character interface {
@@ -31,7 +33,7 @@ func (scene *Scene) Draw() {
 	scene.character.MoveInScreenSize(scene.size)
 }
 
-func (scene *Scene) AvailableNodes() (availableNodes []Node) {
+func (scene *Scene) availableNodes() (availableNodes []Node) {
 	for x := 0; x < scene.size.width; x++ {
 		for y := 0; y < scene.size.height; y++ {
 			node := Node{x: x, y: y}
@@ -42,4 +44,10 @@ func (scene *Scene) AvailableNodes() (availableNodes []Node) {
 	}
 
 	return availableNodes
+}
+
+func (scene *Scene) randomAvailableNode() Node {
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	nodes := scene.availableNodes()
+	return nodes[r.Intn(len(nodes))]
 }
