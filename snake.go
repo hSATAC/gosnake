@@ -40,30 +40,30 @@ func (body Body) Contains(node Node) bool {
 }
 
 func (snake *Snake) Move(screenSize ScreenSize, fruit Node) CharacterStatus {
-	newHead := snake.NewHead(screenSize)
+	newHead := snake.newHead(screenSize)
 	if snake.body.Contains(newHead) {
 		return CHARACTER_STATUS_DEAD
 	} else if newHead == fruit {
-		snake.GrowInScreenSize(screenSize)
+		snake.growInScreenSize(screenSize)
 		return CHARACTER_STATUS_GROW
 	} else {
-		snake.MoveInScreenSize(screenSize)
+		snake.moveInScreenSize(screenSize)
 		return CHARACTER_STATUS_MOVE
 	}
 }
 
-func (snake *Snake) MoveInScreenSize(screenSize ScreenSize) {
+func (snake *Snake) moveInScreenSize(screenSize ScreenSize) {
 	snake.body = snake.body[1:]
-	head := snake.NewHead(screenSize)
+	head := snake.newHead(screenSize)
 	snake.body = append(snake.body, head)
 }
 
-func (snake *Snake) GrowInScreenSize(screenSize ScreenSize) {
-	head := snake.NewHead(screenSize)
+func (snake *Snake) growInScreenSize(screenSize ScreenSize) {
+	head := snake.newHead(screenSize)
 	snake.body = append(snake.body, head)
 }
 
-func (snake *Snake) NewHead(screenSize ScreenSize) Node {
+func (snake *Snake) newHead(screenSize ScreenSize) Node {
 	head := snake.head()
 	var newHead Node
 
