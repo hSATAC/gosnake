@@ -1,0 +1,18 @@
+{
+	"ImportPath": "github.com/hSATAC/gosnake",
+	"GoVersion": "go1.1.2",
+	"Deps": [
+		{
+			"ImportPath": "github.com/davecgh/go-spew/spew",
+			"Rev": "dab6603c081108e15997eedd5def1a9344e63469"
+		},
+		{
+			"ImportPath": "github.com/nsf/termbox-go",
+			"Rev": "ff6e207364e85ff8b2a73c5cc55565618e3e6747"
+		},
+		{
+			"ImportPath": "github.com/stretchr/testify/assert",
+			"Rev": "5f6413d60ae36322c72d4a6d39a2eeb2b12e18f5"
+		}
+	]
+}
