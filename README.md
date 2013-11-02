@@ -7,8 +7,19 @@ This is a simple project for me to practice Go.
 
 See it in action: http://asciinema.org/a/6115
 
+### INSTALL
+
+* `go get github/hSATAC/gosnake`
+* run `gosnake` to play
+
+### NOTICE
+
+You can make 100% reproducible build via [godep](https://github.com/kr/godep).
+
+* `go get github.com/kr/godep`
+* `godep go build` under gosnake src folder.
+
 ### TODO
 
-* Improve reproducible builds using gom or godeps
 * Decouple Snake & Scene
 * Add score
