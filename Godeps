@@ -4,15 +4,15 @@
 	"Deps": [
 		{
 			"ImportPath": "github.com/davecgh/go-spew/spew",
-			"Rev": "dab6603c081108e15997eedd5def1a9344e63469"
+			"Rev": "1fe9f5ca4b46a8247ae5939097f5cfc5d8370729"
 		},
 		{
 			"ImportPath": "github.com/nsf/termbox-go",
-			"Rev": "ff6e207364e85ff8b2a73c5cc55565618e3e6747"
+			"Rev": "64181cd80c53208e7b056697d0decf94f3210ad3"
 		},
 		{
 			"ImportPath": "github.com/stretchr/testify/assert",
-			"Rev": "5f6413d60ae36322c72d4a6d39a2eeb2b12e18f5"
+			"Rev": "4c55a02a9da3f9b9daf583332a2a82c38a4521be"
 		}
 	]
 }
