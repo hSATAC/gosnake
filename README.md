@@ -1,5 +1,6 @@
 gosnake
 =======
+[![Build Status](https://drone.io/github.com/hSATAC/gosnake/status.png)](https://drone.io/github.com/hSATAC/gosnake/latest)
 
 Snake game written in Go
 
